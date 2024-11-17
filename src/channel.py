@@ -5,8 +5,6 @@ from pathlib import Path
 
 from googleapiclient.discovery import build
 
-
-
 class Channel:
     """Класс для ютуб-канала"""
     __youtube = build(
