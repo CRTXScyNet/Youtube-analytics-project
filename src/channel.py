@@ -54,11 +54,16 @@ class Channel:
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
-        print(json.dumps(self.__channel, indent=2, ensure_ascii=False))
+        print(Channel.strj(self.__channel))
 
     @staticmethod
     def get_service():
         return Channel.__youtube
+
+    @staticmethod
+    def strj(your_dict: dict):
+        """return string repr of your dict as json"""
+        return json.dumps(your_dict, indent=2, ensure_ascii=False)
 
     def to_json(self, filename):
         my_dict = {
