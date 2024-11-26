@@ -1,3 +1,5 @@
+import json
+
 from src.channel import Channel
 
 
@@ -11,10 +13,18 @@ class Video:
                        .videos()
                        .list(id=video_id,part='id,snippet,statistics'))
                       .execute())
-        self.title = self.video['items'][0]['snippet']['title']
-        self.url =  f'https://www.youtube.com/watch?v={video_id}'
-        self.view_count = self.video['items'][0]['statistics']['viewCount']
-        self.like_count = self.video['items'][0]['statistics']['likeCount']
+        try:
+            self.title = self.video['items'][0]['snippet']['title']
+            self.url =  f'https://www.youtube.com/watch?v={video_id}'
+            self.view_count = self.video['items'][0]['statistics']['viewCount']
+            self.like_count = self.video['items'][0]['statistics']['likeCount']
+        except IndexError:
+            self.title = None
+            self.url = None
+            self.view_count = None
+            self.like_count = None
+
+
 
     def __str__(self):
         return self.title
@@ -31,10 +41,10 @@ class PLVideo(Video):
         self.url =  f'https://www.youtube.com/watch?v={video_id}&list={pl_id}'
 
 
-
-video1 = PLVideo('4fObz_qw9u4', 'PLv_zOGKKxVph_8g2Mqc3LMhj0M_BfasbC')
-print(video1.url)
-
+#
+# video1 = PLVideo('4fObz_qw9u4', 'PLv_zOGKKxVph_8g2Mqc3LMhj0M_BfasbC')
+# print(video1.url)
+#
 
 
 
